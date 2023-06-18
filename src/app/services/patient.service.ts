@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Patient } from '../models/patient.model';
+import { Patient, PatientResponse } from '../models/patient.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,9 @@ export class PatientService {
 
   constructor(private http: HttpClient) { }
 
-  getPatients(): Observable<Patient[]> {
-    return this.http.get<Patient[]>(this.apiUrl);
+  getPatients(searchBy : String, searchTerm : String, page : number): Observable<PatientResponse> {
+    const url = `${this.apiUrl}/?${searchBy}=${searchTerm}&_page=${page}&_limit=5`;
+    return this.http.get<PatientResponse>(url);
   }
 
   getPatient(id: number): Observable<Patient> {

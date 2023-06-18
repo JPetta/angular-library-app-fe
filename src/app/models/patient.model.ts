@@ -20,4 +20,9 @@ export interface Patient {
     state: string;
     postcode: string;
   }
+
+  export interface PatientResponse {
+    patients: Patient[];
+    totalPages: number;
+  }
   
